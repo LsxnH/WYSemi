@@ -105,8 +105,22 @@ print ("Capacitance Per Area(um2): ", PerAreaCapCal(6.9, 5400))
 print ("Capacitance Per Unit: ", UnitCapCal(6.9, 5400, 11, 1.5, 45, 1))
 
 def main():
-    ChipX      = 200
-    ChipY      = 200
-    BlockSize  = 15
+    ChipX      = 760
+    ChipY      = 760
+    BlockSize  = 11
     BlockSpace = 0.1
     UnitSpace  = 0.1
+    k          = 6.9
+    d          = 5400
+    TrenchLength = BlockSize
+    TrenchCD     = 1.5
+    TrenchDepth  = 45
+    TrenchSpace  = 1
+
+    Cap_Unit = UnitCapCal(k, d, TrenchLength, TrenchCD, TrenchDepth, TrenchSpace)
+    N_Units = UnitsCountCal(ChipX, ChipY, BlockSize, BlockSpace, UnitSpace)
+    Cap = Cap_Unit*N_Units
+
+    print (Cap)
+
+main()

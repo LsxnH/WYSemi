@@ -1,41 +1,30 @@
 import tkinter
 from DesignUnits import *
 
-ChipX      = 760
-ChipY      = 760
-BlockSize  = 11
-BlockSpace = 0.1
-UnitSpace  = 0.1
-k          = 6.9
-d          = 5400
-TrenchLength = 0
-TrenchCD     = 1.5
-TrenchDepth  = 45
-TrenchSpace  = 1
-
-def func(Par):
-    print("myname")
-
-def getValue():
-    ChipX        = float(entry_chipX       .get())
-    ChipY        = float(entry_chipY       .get())
-    #BlockSize    = float(entry_BlockSize   .get())
-    #BlockSpace   = float(entry_BlockSpace  .get())
-    #UnitSpace    = float(entry_UnitSpace   .get())
-    #k            = float(entry_k           .get())
-    #d            = float(entry_d           .get())
-    #TrenchLength = float(entry_TrenchLength.get())
-    #TrenchCD     = float(entry_TrenchCD    .get())
-    #TrenchDepth  = float(entry_TrenchDepth .get())
-    #TrenchSpace  = float(entry_TrenchSpace .get())
-
 def printValue(BV, Cap):
-    BVOutput.insert(tkinter.END, "%s"%(BV))
-    CapOutput.insert(tkinter.END, "%s"%(Cap))
+    BVOutput.delete(0.0, tkinter.END)
+    BVOutput.insert(tkinter.END, "%.1f"%(BV))
+    CapOutput.delete(0.0, tkinter.END)
+    CapOutput.insert(tkinter.END, "%.1f"%(Cap))
 
 def on_push():
-    getValue()
-    printValue(ChipX, ChipY) ###  value not updated
+    ChipX        = float(entry_chipX       .get())
+    ChipY        = float(entry_chipY       .get())
+    BlockSize    = float(entry_BlockSize   .get())
+    BlockSpace   = float(entry_BlockSpace  .get())
+    UnitSpace    = float(entry_UnitSpace   .get())
+    k            = float(entry_k           .get())
+    d            = float(entry_d           .get())
+    TrenchLength = float(entry_TrenchLength.get())
+    TrenchCD     = float(entry_TrenchCD    .get())
+    TrenchDepth  = float(entry_TrenchDepth .get())
+    TrenchSpace  = float(entry_TrenchSpace .get())
+
+    BV = d*0.075
+    Cap_Unit = UnitCapCal(k, d, TrenchLength, TrenchCD, TrenchDepth, TrenchSpace)
+    N_Units = UnitsCountCal(ChipX, ChipY, BlockSize, BlockSpace, UnitSpace)
+    Cap = Cap_Unit*N_Units
+    printValue(BV, Cap)
 
 root = tkinter.Tk()
 root.title("硅基电容设计")
@@ -43,8 +32,8 @@ root.title("硅基电容设计")
 # 窗口大小
 root.geometry("600x450+374+182")
     
-label_chipX        = tkinter.Label(root, text="封装尺寸X(mm) ：")
-label_chipY        = tkinter.Label(root, text="封装尺寸Y(mm) ：")
+label_chipX        = tkinter.Label(root, text="封装尺寸X(um) ：")
+label_chipY        = tkinter.Label(root, text="封装尺寸Y(um) ：")
 label_BlockSize    = tkinter.Label(root, text="Block size(um) ：")
 label_BlockSpace   = tkinter.Label(root, text="Block space(um) ：")
 label_UnitSpace    = tkinter.Label(root, text="Unit space(um) ：")
@@ -68,15 +57,23 @@ label_TrenchSpace .grid(row=10)
 
 entry_chipX        = tkinter.Entry(root)
 entry_chipY        = tkinter.Entry(root)
-entry_BlockSize    = tkinter.Entry(root)
-entry_BlockSpace   = tkinter.Entry(root)
-entry_UnitSpace    = tkinter.Entry(root)
-entry_k            = tkinter.Entry(root)
-entry_d            = tkinter.Entry(root)
-entry_TrenchLength = tkinter.Entry(root)
-entry_TrenchCD     = tkinter.Entry(root)
-entry_TrenchDepth  = tkinter.Entry(root)
-entry_TrenchSpace  = tkinter.Entry(root)
+entry_BlockSize    = tkinter.Entry(root, textvariable="Andy")
+entry_BlockSpace   = tkinter.Entry(root, )
+entry_UnitSpace    = tkinter.Entry(root, )
+entry_k            = tkinter.Entry(root, )
+entry_d            = tkinter.Entry(root, )
+entry_TrenchLength = tkinter.Entry(root, textvariable="Andy")
+entry_TrenchCD     = tkinter.Entry(root, )
+entry_TrenchDepth  = tkinter.Entry(root, )
+entry_TrenchSpace  = tkinter.Entry(root, )
+entry_BlockSize   .insert(0, 15)
+entry_BlockSpace  .insert(0, 0.1)
+entry_UnitSpace   .insert(0, 0.1)
+entry_k           .insert(0, 3.9)
+entry_d           .insert(0, 300)
+entry_TrenchCD    .insert(0, 0.7)
+entry_TrenchDepth .insert(0, 20)
+entry_TrenchSpace .insert(0, 0.5)
 
 
 entry_chipX       .grid(row=0, column=1)

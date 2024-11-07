@@ -99,11 +99,6 @@ def UnitCapCal(k, d, TrenchLength, TrenchCD, TrenchDepth, TrenchSpace):
     '''
     return (UnitAreaCal(TrenchLength, TrenchCD, TrenchDepth, TrenchSpace)*PerAreaCapCal(k, d))
 
-print ("Total units: ", UnitsCountCal(760, 760, 15, 0.1, 0.1))
-print ("Trenches in one unit: ", UnitTrenchesCal(15, 1.5, 1))
-print ("Capacitance Per Area(um2): ", PerAreaCapCal(6.9, 5400))
-print ("Capacitance Per Unit: ", UnitCapCal(6.9, 5400, 11, 1.5, 45, 1))
-
 def main():
     ChipX      = 760
     ChipY      = 760
@@ -121,6 +116,8 @@ def main():
     N_Units = UnitsCountCal(ChipX, ChipY, BlockSize, BlockSpace, UnitSpace)
     Cap = Cap_Unit*N_Units
 
-    print (Cap)
-
-main()
+    print ("Total units: ", N_Units)
+    print ("Trenches in one unit: ", UnitTrenchesCal(BlockSize, TrenchCD, TrenchSpace))
+    print ("Capacitance Per Area(um2): ", PerAreaCapCal(k, d))
+    print ("Capacitance Per Unit(nF): ", Cap_Unit)
+    print ("Capacitance(nF): ", Cap)

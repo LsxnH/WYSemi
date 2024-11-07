@@ -50,7 +50,7 @@ def PerAreaCapCal(k, d):
     Calculate the capacitance per um^2 in nF
     '''
     epsilon = C.epsilon_0*k
-    Cap = epsilon*(10**-12)/(d*10**-10)*10**9
+    Cap = epsilon*(10**-12)/(d*10**-9)*10**9
 
     return Cap
 
@@ -106,7 +106,7 @@ def main():
     BlockSpace = 0.1
     UnitSpace  = 0.1
     k          = 6.9
-    d          = 5400
+    d          = 540
     TrenchLength = BlockSize
     TrenchCD     = 1.5
     TrenchDepth  = 45
